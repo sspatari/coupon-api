@@ -1,0 +1,26 @@
+{
+  "name": "coupon-api",
+  "version": "1.0.0",
+  "description": "Simple coupon Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon bin/dev",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && babel server -s -d dist/server",
+    "production": "npm run build && node bin/production"
+  },
+  "author": "Stanislav Spatari",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.19.1",
+    "nodemon": "^1.17.3"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
