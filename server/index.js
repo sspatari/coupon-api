@@ -3,6 +3,7 @@ import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import config from './config';
+import * as users from '../controllers/users';
 
 let app = express();
 
@@ -13,9 +14,11 @@ if(dev) app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+let userDB = [];
 //==================================================
 // Routes
 //==================================================
+app.post('/users', users.createUser);
 
 // handle 404
 app.use((req, res, next) => {
