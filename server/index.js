@@ -14,10 +14,11 @@ if(dev) app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-let userDB = [];
 //==================================================
 // Routes
 //==================================================
+app.get('/users', users.getUsers);
+app.get('/users/:id', users.getUserById);
 app.post('/users', users.createUser);
 
 // handle 404

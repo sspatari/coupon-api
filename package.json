@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon bin/dev",
     "clean": "rm -rf dist",
-    "build": "npm run clean && babel server -s -d dist/server",
+    "build": "npm run clean && babel server -s -d dist/server && babel controllers -s -d dist/controllers && babel models -s -d dist/models",
     "production": "npm run build && node bin/production"
   },
   "author": "Stanislav Spatari",
