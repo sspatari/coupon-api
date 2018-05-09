@@ -1,28 +1,10 @@
-let userDb = [];
-let idCounter = 0;
+import User from '../models/user';
 
-userDb.insertUser = function (user, callback) {
-  user.id = idCounter;
-  ++idCounter;
-  console.log(this);
-  this.push(user);
-
-  callback();
-};
-
-userDb.getUserById = function(id, callback) {
-  for (let i = 0; i < this.length; ++i) {
-    if (id === this[i].id) {
-      callback(this[i]);
-    }
-  }
-};
-
-export const createUser = (req, res) => {
+export const createUser = (req, res, next) => {
   // validate input
 
   // create actual user
-  let newUser = {
+  let data = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -30,18 +12,42 @@ export const createUser = (req, res) => {
     createdDate: new Date()
   };
 
-  // store the user
-  userDb.insertUser(newUser, () => {
-    return res.send('it worked!!!!!');
+  let newUser = new User(data);
+
+  newUser.save((err) => {
+    if(err) return next(err);
+    return res.send('it worked');
   });
 };
 
-export const getUsers = (req, res) => {
-  return res.send(userDb);
+export const getUsers = (req, res, next) => {
+  User.find({}, (err, users) => {
+    if(err) return next(err);
+    return res.json(users);
+  });
 };
 
-export const getUserById = (req, res) => {
-  userDb.getUserById(req.params.id, (user) => {
+export const getUserById = (req, res, next) => {
+  User.findById(req.params.id, (err, user) => {
+    if(err) return next(err);
+    if(!user)
+      return res.status(404).send('user not found');
     return res.json(user);
+  });
+};
+
+export const updateUser = (req, res, next) => {
+  User.findOneAndUpdate(req.params.id, req.body, {new: true}, (err, user) => {
+    if(err) return next(err);
+    if(!user) return res.status(404).send('No user with that ID');
+    return res.json();
+  });
+};
+
+export const deleteUserById = (req, res, next) => {
+  User.findOneAndRemove(req.params.id, (err, user) => {
+    if(err) return next(err);
+    if(!user) return res.status(404).send('No user with that ID');
+    return res.sendStatus(200);
   });
 };
