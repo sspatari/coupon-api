@@ -34,6 +34,8 @@ app.param('id', (req, res, next, id) => {
 app.get('/users', users.getUsers);
 app.get('/users/:id', users.getUserById);
 app.post('/users', users.createUser);
+app.put('/users/:id', users.updateUser);
+app.delete('/users/:id', users.deleteUserById);
 
 // handle 404
 app.use((req, res, next) => {

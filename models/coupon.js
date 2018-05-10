@@ -22,7 +22,7 @@ let couponSchema = new mongoose.Schema({
   }
 });
 
-couponSchema.pre('save', (callback) => {
+couponSchema.pre('save', function(callback) {
   // run hook here
   // ensure url starts with http://, https://, ftp://
   if (this.url && !(/^((https?)|(ftp)):\/\/.+/.test(this.url)))

@@ -8,6 +8,8 @@ export const createUser = (req, res, next) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
+    phone: req.body.phone,
+    phoneProvider: req.body.phoneProvider,
     password: req.body.password,
     createdDate: new Date()
   };

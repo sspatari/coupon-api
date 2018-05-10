@@ -5,8 +5,8 @@ let userSchema = new mongoose.Schema({
   firstName: {type: String, trim: true},
   lastName: {type: String, trim: true},
   classYear: Number,
-  email: {type: String, unique:true, sparse: true, trim: true},
-  phone: {type: String, unique: true, sparse: true},
+  email: {type: String, unique: true, sparse: true, trim: true},
+  phone: {type: String, unique: true},
   phoneProvider: {type: String, trim: true},
   interests: [Number],
   isAdmin: {type: Boolean, index: true},
@@ -24,7 +24,7 @@ let userSchema = new mongoose.Schema({
 });
 
 // hash if admin, ensure phone and provider if not
-userSchema.pre('save', (callback) => {
+userSchema.pre('save', function(callback) {
   if (this.isAdmin || this.isSuperAdmin) {
     if (!this.email)
       return callback(new Error('Missing email'));
@@ -69,10 +69,6 @@ userSchema.virtual('name').get(function() {
   return name;
 });
 
-// create any methods
-userSchema.methods.greet = () => {
-  console.log('hi!' + this.firstName);
-};
 //TODO method to check hashed password
 userSchema.methods.comparePassword = (pw) => {
   return this.hash === pw;
