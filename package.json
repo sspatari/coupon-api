@@ -7,14 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon bin/dev",
     "clean": "rm -rf dist",
-    "build": "npm run clean && babel server -s -d dist/server && babel controllers -s -d dist/controllers && babel models -s -d dist/models",
+    "build": "npm run clean && babel src -s -d dist/src && babel controllers -s -d dist/controllers && babel models -s -d dist/models",
     "production": "npm run build && node bin/production"
   },
   "author": "Stanislav Spatari",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
     "eslint": "^4.19.1",
@@ -24,7 +24,7 @@
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
-    "mongoose": "^5.0.17",
+    "mongoose": "^5.1.0",
     "morgan": "^1.9.0"
   }
 }

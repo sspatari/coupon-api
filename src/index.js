@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import config from './config';
 import * as users from '../controllers/users';
+import * as coupons from '../controllers/coupons';
 
 let app = express();
 
@@ -36,6 +37,19 @@ app.get('/users/:id', users.getUserById);
 app.post('/users', users.createUser);
 app.put('/users/:id', users.updateUser);
 app.delete('/users/:id', users.deleteUserById);
+
+app.get('/coupons', coupons.getCoupons);
+app.get('/coupons/active', coupons.getActiveCoupons);
+app.get('/coupons/unapproved', coupons.getUnapprovedCoupons);
+app.put('/coupons/:id/approve', coupons.approveCoupon);
+app.get('/coupons/:id', coupons.getCouponById);
+app.post('/coupons', coupons.createCoupon);
+app.put('/coupons/:id', coupons.updateCoupon);
+app.delete('/coupons/:id', coupons.deleteCouponById);
+
+
+
+
 
 // handle 404
 app.use((req, res, next) => {

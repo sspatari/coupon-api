@@ -18,7 +18,7 @@ export const createUser = (req, res, next) => {
 
   newUser.save((err) => {
     if(err) return next(err);
-    return res.send('it worked');
+    return res.sendStatus(200);
   });
 };
 
@@ -32,8 +32,7 @@ export const getUsers = (req, res, next) => {
 export const getUserById = (req, res, next) => {
   User.findById(req.params.id, (err, user) => {
     if(err) return next(err);
-    if(!user)
-      return res.status(404).send('user not found');
+    if(!user) return res.status(404).send('No user with that ID');
     return res.json(user);
   });
 };
